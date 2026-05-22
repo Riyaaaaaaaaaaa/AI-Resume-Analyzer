@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Resume Analyzer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">AI Career Tool</p>
+        <h1>AI Resume Analyzer</h1>
+        <p class="hero-text">Upload or paste your resume content to get an ATS-style score, skill keyword analysis, match percentage, and improvement suggestions.</p>
+      </div>
+      <div class="hero-card">
+        <span class="status-dot"></span>
+        <p>Resume scan engine ready</p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="panel input-panel">
+        <h2>Resume Input</h2>
+        <label for="resumeFile" class="upload-box">
+          <span>Upload Resume</span>
+          <small>TXT files work best for this demo</small>
+          <input type="file" id="resumeFile" accept=".txt" />
+        </label>
+
+        <label for="jobRole">Target Role</label>
+        <select id="jobRole">
+          <option value="software">Software Developer</option>
+          <option value="frontend">Frontend Developer</option>
+          <option value="backend">Backend Developer</option>
+          <option value="data">Data Analyst</option>
+        </select>
+
+        <label for="resumeText">Paste Resume Text</label>
+        <textarea id="resumeText" placeholder="Paste your resume content here..."></textarea>
+
+        <button id="analyzeBtn">Analyze Resume</button>
+      </article>
+
+      <article class="panel score-panel">
+        <h2>ATS Match Score</h2>
+        <div class="score-circle">
+          <span id="scoreValue">0%</span>
+        </div>
+        <p id="scoreLabel">Upload or paste a resume to begin.</p>
+        <div class="mini-stats">
+          <div><strong id="matchedCount">0</strong><span>Skills Matched</span></div>
+          <div><strong id="missingCount">0</strong><span>Missing Skills</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid bottom-grid">
+      <article class="panel">
+        <h2>Matched Keywords</h2>
+        <div id="matchedKeywords" class="chips empty">No keywords analyzed yet.</div>
+      </article>
+
+      <article class="panel">
+        <h2>Missing Keywords</h2>
+        <div id="missingKeywords" class="chips empty">No keywords analyzed yet.</div>
+      </article>
+    </section>
+
+    <section class="panel suggestions-panel">
+      <h2>Improvement Suggestions</h2>
+      <ul id="suggestions">
+        <li>Add your resume text and run the analyzer.</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
