@@ -5,93 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Resume Analyzer</title>
   <link rel="stylesheet" href="style.css" />
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 </head>
+
 <body>
-  <main class="app-shell">
+  <main class="app">
     <section class="hero">
-      <div>
-        <p class="eyebrow">Resume Intelligence Tool</p>
-        <h1>AI Resume Analyzer</h1>
-        <p class="hero-text">
-          Upload a resume and compare it against a target role. The analyzer extracts text from PDF, DOCX, or TXT files and generates an ATS-style score, keyword match, and improvement suggestions.
-        </p>
-      </div>
-      <div class="hero-card">
-        <span class="status-dot"></span>
-        <p>Frontend-only project</p>
-        <strong>Works on GitHub Pages</strong>
-      </div>
+      <p class="eyebrow">Resume Intelligence Tool</p>
+      <h1>AI Resume Analyzer</h1>
+      <p class="hero-text">
+        Upload your resume, compare it with a target role, and get an ATS-style
+        score, keyword match, and improvement suggestions.
+      </p>
     </section>
 
-    <section class="grid-layout">
-      <div class="panel upload-panel">
-        <h2>Upload Resume</h2>
-        <p class="muted">Supports PDF, DOCX, and TXT files.</p>
+    <section class="panel">
+      <h2>Upload Resume</h2>
 
-        <label class="upload-box" for="resumeInput">
-          <span>Drop your resume here</span>
-          <strong>Choose File</strong>
-          <small id="fileName">No file selected</small>
-        </label>
-        <input id="resumeInput" type="file" accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain" />
-
-        <label for="roleSelect">Target Role</label>
-        <select id="roleSelect">
-          <option value="frontend">Frontend Developer</option>
-          <option value="software">Software Engineer</option>
-          <option value="fullstack">Full Stack Developer</option>
-          <option value="cybersecurity">Cybersecurity Analyst</option>
-        </select>
-
-        <label for="jobDescription">Job Description / Required Skills</label>
-        <textarea id="jobDescription" rows="8" placeholder="Paste a job description here or use the selected role keywords."></textarea>
-
-        <button id="analyzeBtn">Analyze Resume</button>
-        <p id="message" class="message"></p>
+      <div class="upload-box">
+        <input type="file" id="resumeFile" accept=".pdf,.docx,.txt" />
+        <p>Supports PDF, DOCX, and TXT files</p>
       </div>
 
-      <div class="panel results-panel">
-        <div class="score-wrapper">
-          <div class="score-circle">
-            <span id="scoreValue">0</span>
-            <small>ATS Score</small>
-          </div>
-          <div>
-            <h2 id="resultTitle">Waiting for resume</h2>
-            <p id="resultSummary" class="muted">Upload a file and click Analyze Resume.</p>
-          </div>
-        </div>
+      <label>Target Role</label>
+      <select id="role">
+        <option value="frontend">Frontend Developer</option>
+        <option value="software">Software Engineer</option>
+        <option value="backend">Backend Developer</option>
+        <option value="fullstack">Full Stack Developer</option>
+      </select>
 
-        <div class="metrics">
-          <div><strong id="wordCount">0</strong><span>Words</span></div>
-          <div><strong id="keywordCount">0</strong><span>Matched Keywords</span></div>
-          <div><strong id="missingCount">0</strong><span>Missing Keywords</span></div>
-        </div>
+      <label>Job Description / Required Skills</label>
+      <textarea id="jobText" placeholder="Paste a job description here or leave empty to use role-based keywords."></textarea>
 
-        <div class="section-block">
-          <h3>Matched Skills</h3>
-          <div id="matchedSkills" class="pill-list empty">No analysis yet</div>
-        </div>
+      <button onclick="analyzeResume()">Analyze Resume</button>
+    </section>
 
-        <div class="section-block">
-          <h3>Missing / Recommended Skills</h3>
-          <div id="missingSkills" class="pill-list empty">No analysis yet</div>
-        </div>
+    <section class="results" id="results">
+      <div class="score-card">
+        <h2>ATS Score</h2>
+        <div class="score" id="score">--</div>
+        <p id="scoreLabel">Upload a resume to begin.</p>
       </div>
-    </section>
 
-    <section class="panel suggestions-panel">
-      <h2>Improvement Suggestions</h2>
-      <ul id="suggestionsList">
-        <li>Upload a resume to generate personalized suggestions.</li>
-      </ul>
-    </section>
+      <div class="result-card">
+        <h3>Matched Keywords</h3>
+        <div id="matched" class="chips"></div>
+      </div>
 
-    <section class="panel preview-panel">
-      <h2>Extracted Resume Text Preview</h2>
-      <pre id="textPreview">No text extracted yet.</pre>
+      <div class="result-card">
+        <h3>Missing Keywords</h3>
+        <div id="missing" class="chips"></div>
+      </div>
+
+      <div class="result-card full">
+        <h3>Suggestions</h3>
+        <ul id="suggestions"></ul>
+      </div>
     </section>
   </main>
 
