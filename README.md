@@ -1,31 +1,31 @@
 # AI Resume Analyzer
 
-A modern frontend project that simulates an AI-powered resume analysis tool. Users can upload or paste resume text, choose a target role, and receive an ATS-style match score, keyword analysis, and improvement suggestions.
+A frontend-only resume analyzer website that extracts text from PDF, DOCX, and TXT resumes and generates an ATS-style score, keyword match report, missing skills, and improvement suggestions.
 
 ## Features
 
-- Resume text upload using `.txt` files
-- Paste resume content manually
-- Target role selection
-- ATS-style match percentage
-- Skill keyword detection
-- Missing keyword analysis
-- Resume improvement suggestions
+- Upload PDF, DOCX, or TXT resumes
+- Real PDF text extraction using PDF.js
+- DOCX text extraction using Mammoth.js
+- ATS-style score simulation
+- Role-based keyword matching
+- Missing skills detection
+- Suggestions panel
+- Extracted text preview
 - Responsive dashboard UI
+- Deployable on GitHub Pages
 
 ## Tech Stack
 
 - HTML
 - CSS
 - JavaScript
+- PDF.js
+- Mammoth.js
 
 ## How to Run Locally
 
-### Option 1: Open directly
-Open `index.html` in your browser.
-
-### Option 2: Run with a local server
-From the project folder, run:
+Open the project folder in terminal and run:
 
 ```bash
 python3 -m http.server 8000
@@ -45,21 +45,13 @@ python -m http.server 8000
 
 ## How to Deploy on GitHub Pages
 
-1. Create a new GitHub repository named `ai-resume-analyzer`
-2. Upload all project files
-3. Go to **Settings**
-4. Open **Pages**
-5. Under **Build and deployment**, choose **Deploy from a branch**
-6. Select branch: `main`
-7. Select folder: `/root`
-8. Save
+1. Create a new GitHub repository.
+2. Upload all files from this folder.
+3. Go to Settings > Pages.
+4. Select GitHub Actions or Deploy from branch.
+5. If using branch deployment, choose main and /root.
+6. Open the generated GitHub Pages URL.
 
-Your website will be available at:
+## Important Note
 
-```text
-https://your-username.github.io/ai-resume-analyzer/
-```
-
-## Project Note
-
-This is a frontend demo project. It does not use a real AI model or store uploaded resumes. The analysis is simulated using keyword matching logic in JavaScript.
+This is a frontend portfolio project. The scoring is simulated and should not be treated as a real hiring or ATS decision system. It is designed to demonstrate frontend development, file parsing, data extraction, and UI logic.
